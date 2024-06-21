@@ -7,7 +7,7 @@ function init() {
    <div id="nav">
    </div>
 </header>
-<div class="loading" id="spinner" style="display:none;">Loading&#8230;</div>
+<div class="loading" id="spinner" style="display:none;">Đang tải&#8230;</div>
 <div>
 <div id="content" style="padding-top: ${UI.header_padding}px;${UI.fixed_footer ?' padding-bottom: clamp(170px, 100%, 300px);': ''}">
 </div>
@@ -213,7 +213,7 @@ function requestListPath(path, params, resultCallback, authErrorCallback, retrie
 		page_index: params['page_index'] || 0
 	};
 	$('#update').show();
-	document.getElementById('update').innerHTML = `<div class='alert alert-info' role='alert'> Connecting...</div></div></div>`;
+	document.getElementById('update').innerHTML = `<div class='alert alert-info' role='alert'> Updating...</div></div></div>`;
 	if (fallback) {
 		path = "/0:fallback"
 	}
@@ -479,7 +479,7 @@ function list(path, id = '', fallback = false) {
 
 		// Loop through each checked checkbox
     if (checkedItems.length === 0) {
-      alert("No items selected!");
+      alert("Chưa chọn file/folder nào!");
       return;
     }
 		checkedItems.forEach((item) => {
@@ -509,13 +509,13 @@ function list(path, id = '', fallback = false) {
 		document.body.removeChild(tempInput);
 
 		// Alert the user that the data has been copied
-		alert("Selected items copied to clipboard!");
+		alert("Các mục được chọn đã copy đến clipboard!");
 	});
 }
 
 function askPassword(path) {
 	$('#spinner').remove();
-	var passwordInput = prompt("Directory encryption, please enter the password", "");
+	var passwordInput = prompt("Dữ liệu bị khóa, hãy điền mật khẩu truy cập", "");
 	localStorage.setItem('password' + path, passwordInput);
 
 	if (passwordInput != null && passwordInput != "") {
@@ -823,7 +823,7 @@ function render_search_result_list() {
   </div>
   </div>
   <div class="card">
-  <div class="${UI.path_nav_alert_class} d-flex align-items-center" role="alert" style="margin-bottom: 0;">Search Results</div>
+  <div class="${UI.path_nav_alert_class} d-flex align-items-center" role="alert" style="margin-bottom: 0;">Kết quả tìm kiếm</div>
   <div id="list" class="list-group text-break">
   </div>
   </div>
@@ -1069,17 +1069,17 @@ function onSearchResultItemClick(file_id, can_preview) {
 		.then(function(obj) {
 			var href = `${obj.path}`;
 			var encodedUrl = href.replace(new RegExp('#', 'g'), '%23').replace(new RegExp('\\?', 'g'), '%3F')
-			title = `Result`;
+			title = `Kết quả`;
 			$('#SearchModelLabel').html(title);
-			content = `<a class="btn btn-info" href="${encodedUrl}${can_preview ? '?a=view' : ''}">Open</a> <a class="btn btn-secondary" href="${encodedUrl}${can_preview ? '?a=view' : ''}" target="_blank">Open in New Tab</a>`;
+			content = `<a class="btn btn-info" href="${encodedUrl}${can_preview ? '?a=view' : ''}">Mở</a> <a class="btn btn-secondary" href="${encodedUrl}${can_preview ? '?a=view' : ''}" target="_blank">Mở trong Tab mới</a>`;
 			$('#modal-body-space').html(content);
 		})
 		.catch(function(error) {
 			console.log(error);
 			var link = ""
-			title = `Fallback Method`;
+			title = `Kết quả lỗi`;
 			$('#SearchModelLabel').html(title);
-			content = `<a class="btn btn-info" href="/fallback?id=${file_id}&${can_preview ? 'a=view' : ''}">Open</a> <a class="btn btn-secondary" href="/fallback?id=${file_id}&${can_preview ? 'a=view' : ''}" target="_blank">Open in New Tab</a>`;
+			content = `<a class="btn btn-info" href="/fallback?id=${file_id}&${can_preview ? 'a=view' : ''}">Mở</a> <a class="btn btn-secondary" href="/fallback?id=${file_id}&${can_preview ? 'a=view' : ''}" target="_blank">Mở trong Tab mới</a>`;
 			$('#modal-body-space').html(content);
 		});
 }
@@ -1154,12 +1154,12 @@ async function fallback(id, type) {
           <div class="container"><br>
           <div class="card text-center">
             <div class="card-body text-center">
-              <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error. ` + error + `</div>
+              <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Lỗi 1157. ` + error + `</div>
             </div>
-            <p>The requested URL was not found on this server. That’s all we know.</p>
+            <p>Dữ liệu không tìm thấy trên server hoặc bị lỗi. Hãy thử lại.</p>
             <div class="card-text text-center">
               <div class="btn-group text-center">
-                <a href="/" type="button" class="btn btn-primary">Homepage</a>
+                <a href="/" type="button" class="btn btn-primary">Trang chủ</a>
               </div>
             </div><br>
           </div>
@@ -1229,12 +1229,12 @@ async function file(path) {
           <div class="container"><br>
           <div class="card text-center">
             <div class="card-body text-center">
-              <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> That’s an error. ` + error + `</div>
+              <div class="${UI.file_view_alert_class}" id="file_details" role="alert"><b>404.</b> Lỗi 1232. ` + error + `</div>
             </div>
-            <p>The requested URL was not found on this server. That’s all we know.</p>
+            <p>Dữ liệu không tìm thấy trên server hoặc bị lỗi. Hãy thử lại.</p>
             <div class="card-text text-center">
               <div class="btn-group text-center">
-                <a href="/" type="button" class="btn btn-primary">Homepage</a>
+                <a href="/" type="button" class="btn btn-primary">Trang chủ</a>
               </div>
             </div><br>
           </div>
@@ -1304,9 +1304,9 @@ function file_others(name, encoded_name, size, url, file_id, cookie_folder_id) {
                   <span class="sr-only"></span>
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Free)</a>
-                  <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Lite)</a>
-                  <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM+ (Plus)</a>
+                  <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Free)</a>
+                  <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Lite)</a>
+                  <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM+(Plus)</a>
                 </div>
             </div>
             ` + copyButton + copyFileBox+`
@@ -1378,9 +1378,9 @@ function file_code(name, encoded_name, size, bytes, url, ext, file_id, cookie_fo
                 <span class="sr-only"></span>
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Free)</a>
-                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Lite)</a>
-                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM+ (Plus)</a>
+                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Free)</a>
+                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Lite)</a>
+                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM+(Plus)</a>
               </div>
             </div>
             ` + copyButton + copyFileBox + `
@@ -1404,7 +1404,7 @@ function file_code(name, encoded_name, size, bytes, url, ext, file_id, cookie_fo
 		});
 	} else {
 		$("#code_spinner").html("");
-		$('#editor').html(`<div class="${UI.file_view_alert_class}" id="file_details" role="alert">File size is too large to preview, Max Limit is 2 MB</div>`);
+		$('#editor').html(`<div class="${UI.file_view_alert_class}" id="file_details" role="alert">Không thể preview do dữ liệu quá lớn (giới hạn là 2 MB)</div>`);
 	}
 }
 
@@ -1495,9 +1495,9 @@ function file_video(name, encoded_name, size, poster, url, mimeType, file_id, co
               <a class="dropdown-item" href="mpv://${url_base64}">mpv x64</a>
               <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${encoded_name};end">MX Player (Free)</a>
               <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${encoded_name};end">MX Player (Pro)</a>
-              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Free)</a>
-              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Lite)</a>
-              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM+ (Plus)</a>
+              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Free)</a>
+              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Lite)</a>
+              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM+(Plus)</a>
               </div>
           </div>
           `+copyButton+copyFileBox+`
@@ -1522,11 +1522,14 @@ function file_video(name, encoded_name, size, poster, url, mimeType, file_id, co
 		} else if (player_config.player == "dplayer") {
 			const dp = new DPlayer({
 				container: document.getElementById('player-container'),
+				autoplay: false,
+				preload: 'auto',
 				screenshot: true,
 				video: {
 					url: url,
 					pic: poster,
 					thumbnails: poster,
+					type: 'auto',
 				},
 			});
 		} else if (player_config.player == "jwplayer") {
@@ -1538,7 +1541,7 @@ function file_video(name, encoded_name, size, poster, url, mimeType, file_id, co
 				width: "100%",
 				aspectratio: "16:9",
 				title: name,
-				description: "Powered by Google Drive Index",
+				description: "Powered by BKoG",
 				tracks: [{
 					file: url,
 					kind: "captions",
@@ -1630,9 +1633,9 @@ function file_audio(name, encoded_name, size, url, file_id, cookie_folder_id) {
               <a class="dropdown-item" href="mpv://${url_base64}">mpv x64</a>
               <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${encoded_name};end">MX Player (Free)</a>
               <a class="dropdown-item" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${encoded_name};end">MX Player (Pro)</a>
-              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Free)</a>
-              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Lite)</a>
-              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM+ (Plus)</a>
+              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Free)</a>
+              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Lite)</a>
+              <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM+(Plus)</a>
               </div>
           </div>
           `+copyButton+copyFileBox+`
@@ -1714,9 +1717,9 @@ function file_pdf(name, encoded_name, size, url, file_id, cookie_folder_id) {
             <span class="sr-only"></span>
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Free)</a>
-            <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Lite)</a>
-            <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM+ (Plus)</a>
+            <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Free)</a>
+            <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Lite)</a>
+            <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM+(Plus)</a>
         </div>
     </div>
     ` + copyButton + `
@@ -1783,9 +1786,9 @@ function file_image(name, encoded_name, size, url, file_id, cookie_folder_id) {
                 <span class="sr-only"></span>
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Free)</a>
-                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM (Lite)</a>
-                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">1DM+ (Plus)</a>
+                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Free)</a>
+                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.adm.lite/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM (Lite)</a>
+                <a class="dropdown-item" href="intent:${url}#Intent;component=idm.internet.download.manager.plus/idm.internet.download.manager.Downloader;S.title=${encoded_name};end">Tải bằng 1DM+(Plus)</a>
               </div>
             </div>
             ` + copyButton + copyFileBox + `
